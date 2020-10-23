@@ -1,7 +1,5 @@
 package com.apress.prospring5.ch8.entities;
 
-import com.apress.prospring5.ch8.view.SingerDetails;
-
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
@@ -24,30 +22,6 @@ import static javax.persistence.GenerationType.IDENTITY;
                         "left join fetch s.albums a " +
                         "left join fetch s.instruments i")
 })
-@SqlResultSetMapping(
-        name = "singerResult",
-        entities = @EntityResult(entityClass = Singer.class,
-                fields = {
-                        @FieldResult(name = "id", column = "uid"),
-                        @FieldResult(name = "firstName", column = "nom"),
-                        @FieldResult(name = "birthDate", column = "datenaiss"),
-                        @FieldResult(name = "lastName", column = "prenom"),
-                        @FieldResult(name = "version", column = "version")})
-)
-@SqlResultSetMapping(
-        name="SingerDetailsResult",
-        classes={
-                @ConstructorResult(
-                        targetClass= SingerDetails.class,
-                        columns={
-                                @ColumnResult(name="id"),
-                                @ColumnResult(name="name"),
-                                @ColumnResult(name="nbrAlbum"),
-                                @ColumnResult(name="nbrInstru")
-                        }
-                )
-        }
-)
 public class Singer implements Serializable {
     public static final String FIND_ALL = "Singer.findAll";
     public static final String FIND_SINGER_BY_ID = "Singer.findById";
